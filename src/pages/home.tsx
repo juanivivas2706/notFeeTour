@@ -6,9 +6,10 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { HomeProps, HeaderHomeProps, BodyHomeProps} from "./types";
 import PlacesCard from "../components/places";
-import { getTimeOfDay } from "../functions";
+import { getTimeOfDay } from "../API/functions";
+import { FilterBox, FilterModal } from "../components/filters";
 
-import { fetchAPI } from "../fetch";
+import { fetchAPI } from "../API/fetch";
 
 export default function Home(props: HomeProps) {
     return (
@@ -36,6 +37,19 @@ function HeaderHome(props: HeaderHomeProps){
 
 function BodyHome(props: BodyHomeProps) {
     const [places, setPlaces] = useState([]);
+    const [filterModalVisible, setFilterModalVisible] = useState(false);
+    const [filters, setFilters] = useState({
+            score: false,
+            distance: false,
+            price: false,
+        });
+    
+    const [categories, setCategories] = useState({
+        Restaurante: false,
+        Cafeteria: false,
+        Museos: false,
+        Monumentos: false,
+    });
     
     // ENVIAR DATA PARA FILTRAR EN BACKEND
     useEffect(() => {
@@ -45,15 +59,17 @@ function BodyHome(props: BodyHomeProps) {
         };
 
         fetchData();
-    }, []);
+    }, [filters, categories]);
 
     return (
         <View style={bodyStyles.container}>
             <View style={bodyStyles.container2}>
+
                 <View style={bodyStyles.headerSearch}>
                     <Text style={bodyStyles.text}>Joyas {'\n'}escondidas</Text>
-                    <Text style={bodyStyles.text}>Filtros</Text>
+                    <FilterBox onPress={() => setFilterModalVisible(true)}/>
                 </View>
+
                 <ScrollView
                     style={bodyStyles.headerBody}
                     contentContainerStyle={bodyStyles.headerBodyContent}
@@ -71,6 +87,8 @@ function BodyHome(props: BodyHomeProps) {
                         </View>
                     ))}
                 </ScrollView>
+
+                <FilterModal visible={filterModalVisible} onRequestClose={() => setFilterModalVisible(false)} filters={filters} categories={categories} setFilters={setFilters} setCategories={setCategories}/>
             </View>
         </View>
     )

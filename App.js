@@ -3,7 +3,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { fetchAPI } from './src/fetch.ts';
+import { fetchAPI } from './src/API/fetch.ts';
 
 const Tab = createMaterialTopTabNavigator();
 
