@@ -25,5 +25,6 @@ export interface ButtonGenericProps {
     width?: number;
     height?: number;
     state: boolean;
+    arrow: boolean;
     changeState: () => void;
 }

@@ -12,7 +12,7 @@ export default function ButtonGeneric(props: ButtonGenericProps) {
         <Pressable style={[props.state ? styles.stateOn : styles.stateOff, { width: props.width, height: props.height }]} onPress={handlePress}>
             <View style={styles.content}>
                 <Text style={[styles.text, props.state ? styles.textOn : styles.textOff]}>{props.text}</Text>
-                <Text style={[styles.arrow, props.state ? styles.textOn : styles.textOff]}>{props.state ? '↑' : '↓'}</Text>
+                {props.arrow ? <Text style={[styles.arrow, props.state ? styles.textOn : styles.textOff]}>{props.state ? '↑' : '↓'}</Text> : null}
             </View>
         </Pressable>
     );

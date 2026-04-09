@@ -11,9 +11,7 @@ export async function fetchAPI(props: fetchAPIprops) {
             'Accept': 'application/json'
         },
         credentials: 'include',
-        ...(method !== 'GET' && props.data !== undefined
-            ? { body: JSON.stringify(props.data) }
-            : {})
+        body: JSON.stringify(props.data)
     });
 
     if (!response.ok) {

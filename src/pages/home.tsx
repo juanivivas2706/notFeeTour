@@ -38,23 +38,25 @@ function HeaderHome(props: HeaderHomeProps){
 function BodyHome(props: BodyHomeProps) {
     const [places, setPlaces] = useState([]);
     const [filterModalVisible, setFilterModalVisible] = useState(false);
+
     const [filters, setFilters] = useState({
             score: false,
             distance: false,
             price: false,
-        });
-    
+        });    
     const [categories, setCategories] = useState({
         Restaurante: false,
         Cafeteria: false,
         Museos: false,
-        Monumentos: false,
+        Monumento: false,
+        Historico: false,
+        Teatro: false,
     });
     
     // ENVIAR DATA PARA FILTRAR EN BACKEND
     useEffect(() => {
         const fetchData = async () => {
-            fetchAPI({ url: 'Places', method: 'GET' })
+            fetchAPI({ url: 'Places', method: 'POST', data: { filters, categories } })
             .then(response => { setPlaces(response); })
         };
 

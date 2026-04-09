@@ -43,6 +43,7 @@ export function FilterModal(props: FilterModalProps) {
                                 width={120}
                                 height={50}
                                 state={filters[filter as keyof typeof filters] as boolean}
+                                arrow={true}
                                 changeState={() => setFilters(prev => ({ ...prev, [filter]: !prev[filter as keyof typeof filters] }))}
                             />
                         ))}
@@ -61,6 +62,7 @@ export function FilterModal(props: FilterModalProps) {
                                 text={category}
                                 width={150}
                                 height={50}
+                                arrow={false}
                                 state={categories[category as keyof typeof categories] as boolean}
                                 changeState={() => setCategories(prev => ({ ...prev, [category]: !prev[category as keyof typeof categories] }))}
                             />
